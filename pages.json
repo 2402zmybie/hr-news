@@ -3,7 +3,9 @@
 		{
 			"path": "pages/tabbar/index/index",
 			"style": {
-				"navigationBarTitleText": "首页"
+				"navigationBarTitleText": "首页",
+				//去掉原生导航栏
+				"navigationStyle":"custom"
 			}
 		}
 	    ,{

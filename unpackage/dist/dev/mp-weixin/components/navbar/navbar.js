@@ -114,7 +114,13 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -129,10 +135,39 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 var _default =
 {
   data: function data() {
-    return {};
+    return {
+      statusBarHeight: 20,
+      navBarHeight: 45,
+      windowWidth: 345 };
 
+  },
+  //组件加载的时候执行,  相当于页面的onLoad
+  created: function created() {
+    var self = this;
+    //获取状态栏高度
+    var info = uni.getSystemInfo({
+      success: function success(res) {var
+        statusBarHeight = res.statusBarHeight,windowWidth = res.windowWidth;
+        self.statusBarHeight = statusBarHeight;
+        self.windowWidth = windowWidth;
+        console.log("\u72B6\u6001\u680F\u9AD8\u5EA6: ".concat(self.statusBarHeight, "px"));
+      } });
+
+
+    //在app, h5, 阿里小程序不运行
+
+    //获取胶囊的信息
+    var menuButtonInfo = uni.getMenuButtonBoundingClientRect();
+    console.log(menuButtonInfo);
+    //动态获取导航栏的高度
+    //(胶囊底部高度-状态栏高度) + (胶囊顶部高度 - 状态栏高度)
+    var navBarHeight = menuButtonInfo.bottom - self.statusBarHeight + (
+    menuButtonInfo.top - self.statusBarHeight);
+    self.navBarHeight = navBarHeight;
+    self.windowWidth = menuButtonInfo.left;
 
   } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

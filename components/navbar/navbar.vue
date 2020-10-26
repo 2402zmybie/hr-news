@@ -45,7 +45,7 @@
 			// #ifndef APP-PLUS || H5 || MP-ALIPAY
 			//获取胶囊的信息
 			const menuButtonInfo = uni.getMenuButtonBoundingClientRect()
-			console.log(menuButtonInfo);
+			// console.log(menuButtonInfo);
 			//动态获取导航栏的高度
 			//(胶囊底部高度-状态栏高度) + (胶囊顶部高度 - 状态栏高度)
 			let navBarHeight = (menuButtonInfo.bottom - self.statusBarHeight)

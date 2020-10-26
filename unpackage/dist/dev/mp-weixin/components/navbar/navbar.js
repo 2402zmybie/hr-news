@@ -132,13 +132,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 var _default =
 {
   data: function data() {
     return {
       statusBarHeight: 20,
       navBarHeight: 45,
-      windowWidth: 345 };
+      windowWidth: 375 };
 
   },
   //组件加载的时候执行,  相当于页面的onLoad

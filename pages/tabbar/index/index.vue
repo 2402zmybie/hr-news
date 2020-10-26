@@ -1,9 +1,10 @@
 <template>
 	<view class="content">
 		<navbar></navbar>
-		<view v-for="item in 100">
+		<tab></tab>
+		<!-- <view v-for="item in 100">
 			{{item}}内容
-		</view>
+		</view> -->
 	</view>
 </template>
 

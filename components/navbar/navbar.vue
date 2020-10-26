@@ -6,13 +6,16 @@
 			<!-- 导航栏内容 -->
 			<view class="navbar-content" :style="{height: navBarHeight + 'px',width:windowWidth + 'px'}">
 				<view class="navbar-search">
-					<view class="navbar-search-icon"></view>
+					<view class="navbar-search-icon">
+						<text class="iconfont icon-iconsearch"></text>
+						<!-- <uni-icons type="search" size="26px" color="#999"></uni-icons> -->
+					</view>
 					<view class="navbar-search-text">uni-app,vue</view>
 				</view>
 			</view>
 		</view>
 		<!-- 占位,让内容下移 -->
-		<view style="height: 45px;"></view>
+		<view :style="{height: statusBarHeight + navBarHeight + 'px'}"></view>
 	</view>
 </template>
 
@@ -22,7 +25,7 @@
 			return {
 				statusBarHeight:20, 
 				navBarHeight: 45,
-				windowWidth:345
+				windowWidth:375
 			};
 		},
 		//组件加载的时候执行,  相当于页面的onLoad
@@ -79,9 +82,6 @@
 				border-radius: 30px;
 				padding: 0 10px;
 				.navbar-search-icon {
-					width: 10px;
-					height: 10px;
-					border: 1px red solid;
 					margin-right: 10px;
 				}
 				.navbar-search-text {

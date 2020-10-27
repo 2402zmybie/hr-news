@@ -1,7 +1,7 @@
 <template>
 	<view class="content">
 		<navbar></navbar>
-		<tab :list = "tabList"></tab>
+		<tab :list = "tabList" @tab="tab"></tab>
 		<!-- <view v-for="item in 100">
 			{{item}}内容
 		</view> -->
@@ -20,19 +20,14 @@
 		},
 		methods: {
 			getLabel() {
-				// uniCloud.callFunction({
-				// 	name:'get_label'
-				// }).then((res) => {
-				// 	console.log(res);
-				// 	const {result} = res
-				// 	this.tabList = result.data
-				// })
-				console.log(this.$api);
 				this.$api.get_label({
 				}).then((res) => {
 					const {data} = res
 					this.tabList = data
 				})
+			},
+			tab(data,index) {
+				console.log(data, index);
 			}
 		}
 	}

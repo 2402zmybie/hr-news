@@ -7824,7 +7824,6 @@ module.exports = g;
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });exports.get_label = void 0;var _http = _interopRequireDefault(__webpack_require__(/*! ../http.js */ 59));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
-
 var get_label = function get_label(data) {
   return (0, _http.default)({
     url: 'get_label',

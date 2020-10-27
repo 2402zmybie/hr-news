@@ -162,19 +162,14 @@ var _default =
   },
   methods: {
     getLabel: function getLabel() {var _this = this;
-      // uniCloud.callFunction({
-      // 	name:'get_label'
-      // }).then((res) => {
-      // 	console.log(res);
-      // 	const {result} = res
-      // 	this.tabList = result.data
-      // })
-      console.log(this.$api);
       this.$api.get_label({}).
       then(function (res) {var
         data = res.data;
         _this.tabList = data;
       });
+    },
+    tab: function tab(data, index) {
+      console.log(data, index);
     } } };exports.default = _default;
 
 /***/ })

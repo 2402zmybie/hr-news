@@ -1,73 +1,73 @@
 <template>
 	<view>
 		<!-- 基础卡片 -->
-		<view v-if="mode === 'base'" class="listcard">
+		<view v-if="item.mode === 'base'" class="listcard">
 			<view class="listcard-image">
-				<image src="../../static/logo.png" mode="aspectFill"></image>
+				<image :src="item.cover[0]" mode="aspectFill"></image>
 			</view>
 			<view class="listcard-content">
 				<view class="listcard-content_title">
 					<text>
-						uni-app开发框架uni-app开发框架uni-app开发框架uni-app开发框架uni-app开发框架uni-app开发框架uni-app开发框架uni-app开发框架uni-app开发框架uni-app开发框架uni-app开发框架uni-app开发框架
+						{{ item.title }}
 					</text>
 				</view>
 				<view class="listcard-content_des">
 					<view class="listcard-content_desc-label">
 						<view class="listcard-content_desc-label-item">
-							前端
+							{{ item.classify }}
 						</view>
 					</view>
-					<view class="listcard-content_desc-browse">120浏览</view>
+					<view class="listcard-content_desc-browse">{{ item.browse_count }}浏览</view>
 				</view>
 			</view>
 		</view>
 		
 		
 		<!-- 多图卡片 -->
-		<view v-if="mode === 'column'" class="listcard mode-column">
+		<view v-if="item.mode === 'column'" class="listcard mode-column">
 			<view class="listcard-content">
 				<view class="listcard-content_title">
 					<text>
-						uni-app开发框架uni-app开发框架uni-app开发框架uni-app开发框架uni-app开发框架uni-app开发框架uni-app开发框架uni-app开发框架uni-app开发框架uni-app开发框架uni-app开发框架uni-app开发框架
+						{{item.title}}
 					</text>
 				</view>
 				<view class="listcard-image">
-					<view v-for="item in 3" :key="item" class="listcard-image_item">
-						<image src="../../static/logo.png" mode="aspectFill"></image>
+					<view v-if="index <= 2" v-for="(item,index) in item.cover" :key="index" class="listcard-image_item">
+						<image :src="item" mode="aspectFill"></image>
 					</view>
 				</view>
 				
 				<view class="listcard-content_des">
 					<view class="listcard-content_desc-label">
 						<view class="listcard-content_desc-label-item">
-							前端
+							{{ item.classify }}
 						</view>
 					</view>
-					<view class="listcard-content_desc-browse">120浏览</view>
+					<view class="listcard-content_desc-browse">{{ item.browse_count }}浏览</view>
 				</view>
 			</view>
 		</view>
 		
 		
 		<!-- 大图卡片 -->
-		<view v-if="mode === 'image'" class="listcard mode-image">
+		<view v-if="item.mode === 'image'" class="listcard mode-image">
 			<view class="listcard-image">
-				<image src="../../static/logo.png" mode="aspectFill"></image>
+				<image :src="item.cover[0]" mode="aspectFill"></image>
 			</view>
 			
 			<view class="listcard-content">
 				<view class="listcard-content_title">
 					<text>
-						uni-app开发框架uni-app开发框架uni-app开发框架uni-app开发框架uni-app开发框架uni-app开发框架uni-app开发框架uni-app开发框架uni-app开发框架uni-app开发框架uni-app开发框架uni-app开发框架
+						{{item.title}}
 					</text>
 				</view>
 				<view class="listcard-content_des">
 					<view class="listcard-content_desc-label">
 						<view class="listcard-content_desc-label-item">
-							前端
+							{{ item.classify }}
 						</view>
 					</view>
-					<view class="listcard-content_desc-browse">120浏览</view>
+					<view class="listcard-content_desc-browse">{{ item.browse_count }}浏览</view>
 				</view>
 			</view>
 		</view>
@@ -77,9 +77,11 @@
 <script>
 	export default {
 		props:{
-			mode: {
-				type:String,
-				default: 'base'
+			item: {
+				type:Object,
+				default() {
+					return {}
+				}
 			}
 		},
 		data() {

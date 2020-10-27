@@ -1,7 +1,7 @@
 <template>
 	<swiper class="home-swiper" :current="activeIndex" @change="change">
 		<swiper-item class="swiper-item" v-for="(item,index) in tab" :key="index">
-			<list-item :list="list"></list-item>
+			<list-item :list="listCatchData[index]"></list-item>
 		</swiper-item>
 	</swiper>
 </template>
@@ -26,20 +26,37 @@
 		},
 		data() {
 			return {
-				list:[]
+				list:[],
+				//缓存数据
+				listCatchData:{}
 			};
 		},
+		watch:{
+			tab(newValue,oldValue) {
+				// debugger
+				if(newValue.length === 0) return;
+				this.getList(this.activeIndex)
+			}
+		},
 		mounted() {
-			this.getList()
+			
 		},
 		methods:{
 			change(e) {
 				const {current} = e.detail
 				this.$emit('change',current )
+				this.getList(current)
 			},
-			getList() {
-				this.$api.get_list().then(res => {
-					this.list = res.data
+			getList(current) {
+				this.$api.get_list({
+					name:this.tab[current].name
+				}).then(res => {
+					const {data} = res
+					console.log("请求: " + current);
+					// this.listCatchData[current] = data
+					// listCatchData: {0: [] , 1: []}
+					// 由于数组是引用类型, 数据发生变化并不能发生页面, 所以强制通知vue进行刷新
+					this.$set(this.listCatchData, current,data)
 				})
 			}
 		}

@@ -1,13 +1,10 @@
 <template>
 	<view class="home">
 		<navbar></navbar>
-		<tab :list = "tabList" @tab="tab"></tab>
-		
-		<list-scroll>
-			<list-card mode="base"></list-card>
-			<list-card mode="image"></list-card>
-			<list-card mode="column"></list-card>
-		</list-scroll>
+		<tab :list = "tabList" :tabIndex="tabIndex" @tab="tab"></tab>
+		<view class="home-list">
+			<list :tab="tabList" :activeIndex="activeIndex" @change="change"></list>
+		</view>
 	</view>
 </template>
 
@@ -15,7 +12,9 @@
 	export default {
 		data() {
 			return {
-				tabList:[]
+				tabList:[],
+				tabIndex:0,
+				activeIndex:0
 			}
 		},
 		onLoad() {
@@ -29,8 +28,13 @@
 					this.tabList = data
 				})
 			},
-			tab(data,index) {
+			tab({data,index}) {
 				console.log(data, index);
+				this.activeIndex = index;
+			},
+			change(current) {
+				console.log("当前swiper的位置: " + current);
+				this.tabIndex = current
 			}
 		}
 	}
@@ -46,5 +50,9 @@ page {
 	flex-direction: column;
 	flex: 1;
 	overflow: hidden;
+	.home-list {
+		flex: 1;
+		box-sizing: border-box;
+	}
 }
 </style>

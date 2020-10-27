@@ -21,6 +21,17 @@
 				default(){
 					return []
 				}
+			},
+			tabIndex: {
+				type:Number,
+				default:0
+			}
+		},
+		//可以监听 data props里面值的变化
+		watch:{
+			tabIndex(newValue,oldValue) {
+				// console.log(newValue + "----------" + oldValue);
+				this.activeIndex = newValue
 			}
 		},
 		data() {

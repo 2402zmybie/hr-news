@@ -25,6 +25,9 @@
 				this.$api.get_label({
 				}).then((res) => {
 					const {data} = res
+					data.unshift({
+						name:"全部"
+					})
 					this.tabList = data
 				})
 			},
@@ -35,6 +38,7 @@
 			change(current) {
 				console.log("当前swiper的位置: " + current);
 				this.tabIndex = current
+				this.activeIndex = current
 			}
 		}
 	}

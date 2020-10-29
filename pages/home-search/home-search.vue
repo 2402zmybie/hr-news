@@ -7,29 +7,39 @@
 					<text class="label-title">搜索历史</text>
 					<text class="label-clear">清空</text>
 				</view>
-				<view v-if="historyList.length > 0" class="label-content">
-					<view class="label-content-item" v-for="item in historyList">
-						{{item}}内容
+				<view v-if="historyLists.length > 0" class="label-content">
+					<view class="label-content-item" v-for="item in historyLists">
+						{{item.name}}内容
 					</view>
 				</view>
 				<view v-else class="no-data">
 					没有搜索历史
 				</view>
 			</view>
+			<button type="default" @click="testBtn">测试vuex</button>
 		</view>
 	</view>
 </template>
 
 <script>
+	import {mapState} from 'vuex'
 	export default {
 		data() {
 			return {
-				historyList:[]
+				
 			};
+		},
+		computed:{
+			...mapState(['historyLists'])
 		},
 		methods:{
 			change(value) {
 				console.log(value);
+			},
+			testBtn() {
+				this.$store.dispatch('set_history', {
+					name: 'LiMing'
+				})
 			}
 		}
 	}

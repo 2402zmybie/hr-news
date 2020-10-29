@@ -4,13 +4,21 @@
 			<!-- 状态栏 -->
 			<view :style="{height: statusBarHeight + 'px'}"></view>
 			<!-- 导航栏内容 -->
-			<view class="navbar-content" :style="{height: navBarHeight + 'px',width:windowWidth + 'px'}">
-				<view class="navbar-search">
+			<view class="navbar-content" :class="{search:isSearch}" :style="{height: navBarHeight + 'px',width:windowWidth + 'px'}" @click.stop="open">
+				<view class="navbar-content_search-icons">
+					<uni-icons type="back" size="22" color="#fff"></uni-icons>
+				</view>
+				<view v-if="!isSearch" class="navbar-search">
+					<!-- 不是搜索页显示 -->
 					<view class="navbar-search-icon">
 						<text class="iconfont icon-iconsearch"></text>
 						<!-- <uni-icons type="search" size="26px" color="#999"></uni-icons> -->
 					</view>
 					<view class="navbar-search-text">uni-app,vue</view>
+				</view>
+				<view v-else class="navbar-search">
+					<!-- 搜索页显示 -->
+					<input class="navbar-search-text" type="text" placeholder="请输入您要搜索的内容" v-model="val" @input="inputChange"/>
 				</view>
 			</view>
 		</view>
@@ -21,11 +29,20 @@
 
 <script>
 	export default {
+		props:{
+			isSearch: {
+				type:Boolean,
+				default() {
+					return false
+				}
+			}
+		},
 		data() {
 			return {
 				statusBarHeight:20, 
 				navBarHeight: 45,
-				windowWidth:375
+				windowWidth:375,
+				val:''
 			};
 		},
 		//组件加载的时候执行,  相当于页面的onLoad
@@ -53,6 +70,21 @@
 			self.navBarHeight = navBarHeight	
 			self.windowWidth = menuButtonInfo.left
 			// #endif
+		},
+		methods:{
+			open() {
+				if(this.isSearch) return;
+				uni.navigateTo({
+					url: '/pages/home-search/home-search',
+					success: res => {},
+					fail: () => {},
+					complete: () => {}
+				});
+			},
+			inputChange(e) {
+				const {value} = e.detail;
+				this.$emit('input', value)
+			}
 		}
 	}
 </script>
@@ -73,6 +105,17 @@
 			justify-content: center;
 			align-items: center;
 			box-sizing: border-box;
+			&.search {
+				padding-left: 0;
+				.navbar-content_search-icons {
+					margin-left: 10px;
+					margin-right: 10px;
+					
+				}
+				.navbar-search {
+					border-radius: 5px;
+				}
+			}
 			.navbar-search {
 				height: 30px;
 				background-color: #FFFFFF;

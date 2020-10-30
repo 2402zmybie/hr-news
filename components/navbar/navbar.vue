@@ -5,8 +5,8 @@
 			<view :style="{height: statusBarHeight + 'px'}"></view>
 			<!-- 导航栏内容 -->
 			<view class="navbar-content" :class="{search:isSearch}" :style="{height: navBarHeight + 'px',width:windowWidth + 'px'}" @click.stop="open">
-				<view class="navbar-content_search-icons">
-					<uni-icons type="back" size="22" color="#fff"></uni-icons>
+				<view v-if="isSearch" class="navbar-content_search-icons" @click="back">
+					<uni-icons type="back" size="22" color="#fff" ></uni-icons>
 				</view>
 				<view v-if="!isSearch" class="navbar-search">
 					<!-- 不是搜索页显示 -->
@@ -30,11 +30,20 @@
 <script>
 	export default {
 		props:{
+			value:{
+				type:[String,Number],
+				default:''
+			},
 			isSearch: {
 				type:Boolean,
 				default() {
 					return false
 				}
+			}
+		},
+		watch:{
+			value(newValue) {
+				this.val = newValue
 			}
 		},
 		data() {
@@ -84,6 +93,14 @@
 			inputChange(e) {
 				const {value} = e.detail;
 				this.$emit('input', value)
+			},
+			back() {
+				// uni.navigateBack({
+				// 	delta: 1
+				// });
+				uni.switchTab({
+					url:'/pages/tabbar/index/index'
+				})
 			}
 		}
 	}
@@ -128,6 +145,7 @@
 					margin-right: 10px;
 				}
 				.navbar-search-text {
+					width: 100%;
 					font-size: 12px;
 					color: #999;
 				}

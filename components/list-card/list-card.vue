@@ -94,6 +94,7 @@
 		},
 		methods:{
 			open() {
+				this.$emit('click',this.item)
 				console.log("条目打开详情");
 			}
 		}

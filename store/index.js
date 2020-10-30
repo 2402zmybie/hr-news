@@ -13,6 +13,9 @@ const store = new Vuex.Store({
 	mutations:{
 		SET_HISTORY_LISTS(state,history) {
 			state.historyLists = history
+		},
+		CLEAR_HISTORY(state) {
+			state.historyLists = []
 		}
 	},
 	actions:{
@@ -20,6 +23,9 @@ const store = new Vuex.Store({
 			let list = state.historyLists
 			list.unshift(history)
 			commit('SET_HISTORY_LISTS',list)
+		},
+		clearHistory({commit}) {
+			commit('CLEAR_HISTORY')
 		}
 	}
 })

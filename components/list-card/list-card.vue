@@ -94,9 +94,19 @@
 		},
 		methods:{
 			open() {
-				this.$emit('click',this.item)
+				const item = this.item
+				this.$emit('click',item)
+				const params = {
+					_id:item._id,
+					title:item.title,
+					author:item.author,
+					create_time:item.create_time,
+					thumbs_up_count:item.thumbs_up_count,
+					browse_count:item.browse_count
+				}
+				//传参注意长度, 尽量使用哪些参数就带过去哪些参数
 				uni.navigateTo({
-					url: '/pages/home-detail/home-detail'
+					url: `/pages/home-detail/home-detail?params=${JSON.stringify(params)}` 
 				});
 			}
 		}

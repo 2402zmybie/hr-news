@@ -1,25 +1,27 @@
 <template>
 	<view class="detail">
 		<view class="detail-title">
-			我是一个前端开发者,我们要不要学习NodeJS?
+			{{formData.title}}
 		</view>
 		<view class="detail-header">
 			<view class="detail-header-logo">
-				<image src="../../static/logo.png" mode="aspectFill"></image>
+				<image :src="formData.author.avatar" mode="aspectFill"></image>
 			</view>
 			<view class="detail-header-content">
 				<view class="detail-header-content-title">
-					mHaotian
+					{{formData.author.avatar_name}}
 				</view>
 				<view class="detail-header-content-info">
-					<text>2020-03-21 12:21:21</text>
-					<text>1234浏览</text>
-					<text>2345赞</text>
+					<text>{{formData.create_time}}</text>
+					<text>{{formData.browse_count}} 浏览</text>
+					<text>{{formData.thumbs_up_count}} 赞</text>
 				</view>
 			</view>
 		</view>
 		<view class="detail-content">
-			详情数据
+			<view class="content-html">
+				{{formData.content}}
+			</view>
 		</view>
 		<view class="detail-bottom">
 			<view class="detail-bottom-input">
@@ -43,10 +45,25 @@
 
 <script>
 	export default {
+		onLoad(options) {
+			this.formData = JSON.parse(options.params)
+			this.getDetail()
+		},
 		data() {
 			return {
-				
+				formData:{}
 			};
+		},
+		methods:{
+			//获取详情信息
+			getDetail() {
+				this.$api.get_detail({
+					article_id: this.formData._id
+				}).then((res) => {
+					const {data} = res
+					this.formData = data
+				})
+			}
 		}
 	}
 </script>
@@ -99,8 +116,11 @@
 		}
 	}
 	.detail-content {
-		height: 2000upx;
-		border: 2upx solid red;
+		margin-top: 40upx;
+		.content-html {
+			padding: 0 30upx;
+			
+		}
 	}
 	
 	.detail-bottom {

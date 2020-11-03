@@ -20,11 +20,19 @@
 		</view>
 		<view class="detail-content">
 			<view class="content-html">
-				<u-parse :content="formData.content" :noData="noData"></u-parse>
+				
+				<!-- <u-parse :content="formData.content" :noData="noData"></u-parse> -->
+				内容
+			</view>
+			<view class="detail-comment">
+				<view class="comment-title">最新评论</view>
+				<view class="comment-content" v-for="item in commentsList" :key="item.comment_id">
+					<comments-box :comments="item"></comments-box>
+				</view>
 			</view>
 		</view>
 		<view class="detail-bottom">
-			<view class="detail-bottom-input">
+			<view class="detail-bottom-input" @click="openComment">
 				<text>谈谈您的看法</text>
 				<uni-icons type="compose" size="16" color="#f07373"></uni-icons>
 			</view>
@@ -40,6 +48,18 @@
 				</view>
 			</view>
 		</view>
+		<uni-popup type="bottom" ref="popup" :maskClick="false">
+			<view class="popup-wrap">
+				<view class="popup-header">
+					<text class="popup-header-item" @click="close">取消</text>
+					<text class="popup-header-item" @click="submit">发布</text>
+				</view>
+				<view class="popup-content">
+					<textarea class="popup-textarea" v-model="commentsValue" placeholder="请输入评论内容" maxlength="200" fixed="true"></textarea>
+					<view class="popup-count">{{commentsValue.length}}/200</view>
+				</view>
+			</view>
+		</uni-popup>
 	</view>
 </template>
 
@@ -52,14 +72,51 @@
 		onLoad(options) {
 			this.formData = JSON.parse(options.params)
 			this.getDetail()
+			this.getComments()
+		},
+		onReady() {
+			//只有自定义组件有ref的属性, 找到组件并调用open方法
 		},
 		data() {
 			return {
 				formData:{},
-				noData:'<p style="text-align:center;color:#666">详情加载中<p>'
+				noData:'<p style="text-align:center;color:#666">详情加载中<p>',
+				commentsValue:'',
+				commentsList:[]
 			};
 		},
 		methods:{
+			submit() {
+				if(!this.commentsValue) {
+					uni.showToast({
+						title: '请输入评论内容',
+						icon:'none'
+					});
+					return
+				}
+				this.setUpdateComment(this.commentsValue)
+			},
+			setUpdateComment(content) {
+				uni.showLoading()
+				this.$api.update_comment({
+					article_id: this.formData._id,
+					content
+				}).then(res => {
+					console.log(res);
+					uni.hideLoading()
+					uni.showToast({
+						title: '发布成功'
+					});
+					this.close()
+				})
+			},
+			//打开评论发布窗口
+			openComment() {
+				this.$refs.popup.open()
+			},
+			close() {
+				this.$refs.popup.close()
+			},
 			//获取详情信息
 			getDetail() {
 				this.$api.get_detail({
@@ -67,6 +124,16 @@
 				}).then((res) => {
 					const {data} = res
 					this.formData = data
+				})
+			},
+			//请求评论内容
+			getComments() {
+				this.$api.get_comments({
+					article_id: this.formData._id
+				}).then(res => {
+					const {data} = res;
+					console.log(data);
+					this.commentsList = data
 				})
 			}
 		}
@@ -125,6 +192,19 @@
 		.content-html {
 			padding: 0 30upx;
 		}
+		.detail-comment {
+			margin-top: 60upx;
+			.comment-title {
+				padding: 20upx 30upx;
+				font-size: 14px;
+				color: #666;
+				border-bottom: 1px solid #F5F5F5;
+			}
+			.comment-content{
+				padding: 0 30upx;
+				border-top: 1px solid #eee;
+			}
+		}
 	}
 	
 	.detail-bottom {
@@ -163,6 +243,37 @@
 				display: flex;
 				justify-content: center;
 				align-items: center;
+			}
+		}
+	}
+	
+	.popup-wrap{
+		background-color: #FFFFFF;
+		.popup-header {
+			display: flex;
+			justify-content: space-between;
+			font-size: 14px;
+			color: #666;
+			border-bottom: 1px #F5F5F5 solid;
+			.popup-header-item {
+				height: 100upx;
+				line-height: 100upx;
+				padding: 0 30upx;
+			}
+		}
+		.popup-content {
+			width: 100%;
+			padding: 30upx;
+			box-sizing: border-box;
+			.popup-textarea {
+				width: 100%;
+				height: 400upx;
+			}
+			.popup-count {
+				display: flex;
+				justify-content: flex-end;
+				font-size: 12px;
+				color: #999;
 			}
 		}
 	}

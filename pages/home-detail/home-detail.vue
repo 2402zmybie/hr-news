@@ -27,7 +27,7 @@
 			<view class="detail-comment">
 				<view class="comment-title">最新评论</view>
 				<view class="comment-content" v-for="item in commentsList" :key="item.comment_id">
-					<comments-box :comments="item"></comments-box>
+					<comments-box :comments="item" @reply="reply"></comments-box>
 				</view>
 			</view>
 		</view>
@@ -82,10 +82,23 @@
 				formData:{},
 				noData:'<p style="text-align:center;color:#666">详情加载中<p>',
 				commentsValue:'',
-				commentsList:[]
+				commentsList:[],
+				replyFormData:{}
 			};
 		},
 		methods:{
+			reply(e) {
+				this.replyFormData = {
+					"comment_id":e.comments.comment_id,
+					"is_reply": e.is_reply
+				}
+				if(e.comments.reply_id) {
+					this.replyFormData.reply_id = e.comments.reply_id
+				}
+				console.log(this.replyFormData);
+	
+				this.openComment()
+			},
 			submit() {
 				if(!this.commentsValue) {
 					uni.showToast({
@@ -94,20 +107,24 @@
 					});
 					return
 				}
-				this.setUpdateComment(this.commentsValue)
+				this.setUpdateComment({content: this.commentsValue, ...this.replyFormData})
 			},
 			setUpdateComment(content) {
 				uni.showLoading()
-				this.$api.update_comment({
+				const formdata = {
 					article_id: this.formData._id,
-					content
-				}).then(res => {
+					...content
+				}
+				
+				this.$api.update_comment(formdata).then(res => {
 					console.log(res);
 					uni.hideLoading()
 					uni.showToast({
 						title: '发布成功'
 					});
+					this.getComments()
 					this.close()
+					this.replyFormData = {}
 				})
 			},
 			//打开评论发布窗口

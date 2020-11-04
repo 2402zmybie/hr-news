@@ -1,0 +1,42 @@
+[{
+	"comment_id": "5q7pjdhopw00",
+	"comment_content": "最新的评论",
+	"create_time": 1604384070134,
+	"author": {
+		"author_id": "5f962d36cf447a0001579ecf",
+		"author_name": "Java架构师讲师团",
+		"avatar": "//img2.sycdn.imooc.com/5dafce1a00013fd501400140-160-160.jpg",
+		"professional": "架构师"
+	},
+	"replys": []
+}, {
+	"comment_id": "39jpbhfo5sy0",
+	"comment_content": "这是一条评论",
+	"create_time": 1604370433453,
+	"author": {
+		"author_id": "5f962d36cf447a0001579ecf",
+		"author_name": "Java架构师讲师团",
+		"professional": "架构师"
+	},
+	"replys": []
+}, {
+	"comment_id": "6j4rp0y0t180",
+	"comment_content": "afafasd",
+	"create_time": 1604370281339,
+	"author": {
+		"author_id": "5f962d36cf447a0001579ecf",
+		"author_name": "Java架构师讲师团",
+		"professional": "架构师"
+	},
+	"replys": []
+}, {
+	"comment_id": "39bc0otpuso0",
+	"comment_content": "评论成功",
+	"create_time": 1604369332682,
+	"author": {
+		"author_id": "5f962d36cf447a0001579ecf",
+		"author_name": "Java架构师讲师团",
+		"professional": "架构师"
+	},
+	"replys": []
+}]

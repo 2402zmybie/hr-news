@@ -41,11 +41,11 @@
 				<view class="detail-bottom-icons-box">
 					<uni-icons type="chat" size="22" color="#f07373"></uni-icons>
 				</view>
-				<view class="detail-bottom-icons-box">
-					<uni-icons type="heart" size="22" color="#f07373"></uni-icons>
+				<view class="detail-bottom-icons-box" @click="likeTap(formData._id)">
+					<uni-icons :type="formData.is_like? 'heart-filled': 'heart'" size="22" color="#f07373"></uni-icons>
 				</view>
-				<view class="detail-bottom-icons-box">
-					<uni-icons type="hand-thumbsup" size="22" color="#f07373"></uni-icons>
+				<view class="detail-bottom-icons-box" @click="thumbsup(formData._id)">
+					<uni-icons :type="formData.is_thumbs_up ? 'hand-thumbsup-filled': 'hand-thumbsup'" size="22" color="#f07373"></uni-icons>
 				</view>
 			</view>
 		</view>
@@ -88,6 +88,14 @@
 			};
 		},
 		methods:{
+			thumbsup(article_id) {
+				this.setUpdateThumbs(article_id)
+			},
+			//收藏
+			likeTap(article_id) {
+				this.setUpdateLike(article_id)
+			},
+			//关注
 			follow(author_id) {
 				this.setUpdateAuthor(author_id)
 			},
@@ -119,7 +127,6 @@
 					article_id: this.formData._id,
 					...content
 				}
-				
 				this.$api.update_comment(formdata).then(res => {
 					console.log(res);
 					uni.hideLoading()
@@ -158,6 +165,7 @@
 					this.commentsList = data
 				})
 			},
+			//关注作者
 			setUpdateAuthor(author_id) {
 				uni.showLoading()
 				this.$api.update_author({
@@ -169,6 +177,38 @@
 						title:this.formData.is_author_like?'关注成功':'取消成功',
 						icon:'none'
 					})
+				})
+			},
+			//收藏文章
+			setUpdateLike(article_id) {
+				uni.showLoading()
+				this.$api.update_likes({
+					article_id
+				})
+				.then(res => {
+					uni.hideLoading()
+					this.formData.is_like = !this.formData.is_like
+					uni.showToast({
+						title:this.formData.is_like?'关注文章成功':'取消关注文章成功',
+						icon:'none'
+					})
+					uni.$emit('update_article')
+				})
+			},
+			//点赞文章
+			setUpdateThumbs(article_id) {
+				uni.showLoading()
+				this.$api.update_thumbsup({
+					article_id
+				}).then(res => {
+					uni.hideLoading()
+					uni.showToast({
+						title: res.msg,
+						icon:"none"
+					});
+					this.formData.is_thumbs_up = true
+					this.formData.thumbs_up_count++
+					
 				})
 			}
 		}

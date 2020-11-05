@@ -37,11 +37,19 @@
 			tab(newValue,oldValue) {
 				// debugger
 				if(newValue.length === 0) return;
+				this.listCatchData = {}
+				this.load = {}
 				this.getList(this.activeIndex)
 			}
 		},
-		mounted() {
-			
+		created() {
+			//监听从详情页发过来的 收藏事件
+			uni.$on('update_article', ()=> {
+				console.log("得到收藏文章触发的事件");
+				this.listCatchData = {}
+				this.load = {}
+				this.getList(this.activeIndex)
+			})
 		},
 		methods:{
 			loadmore() {

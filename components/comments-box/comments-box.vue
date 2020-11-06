@@ -7,7 +7,7 @@
 			<view class="comments-header-info">
 				<view v-if="!comments.is_reply" class="title">{{comments.author.author_name}}</view>
 				<view v-else class="title">{{comments.author.author_name}} <text class="reply-text">回复</text>{{comments.to}}</view>
-				<view class="time">{{comments.create_time}}</view>
+				<view class="time">{{comments.create_time | formatTime}}</view>
 			</view>
 		</view>
 		<view class="comments-content">
@@ -25,6 +25,7 @@
 <script>
 	//组件嵌套自己, 递归组件
 	import commentsBox from '@/components/comments-box/comments-box.vue'
+	import {parseTime} from '../../utils/index.js'
 	export default {
 		name:"comments-box",
 		components:{
@@ -42,6 +43,11 @@
 				default() {
 					return false
 				}
+			}
+		},
+		filters:{
+			formatTime(time) {
+				return parseTime(time)
 			}
 		},
 		data() {

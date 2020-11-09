@@ -6,6 +6,18 @@
 				<view class="follow-tab-item" :class="{active: activeIndex === 1}" @click="tab(1)">作者</view>
 			</view>
 		</view> 
+		<view class="follow-list">
+			<swiper class="follow-list-swiper">
+				<swiper-item>
+					<list-scroll style="height: 100%;">
+						<view v-for="item in 100">{{ item }}</view>
+					</list-scroll>
+				</swiper-item>
+				<swiper-item>
+					<view class="swiper-item">作者</view>
+				</swiper-item>
+			</swiper>
+		</view>
 	</view>
 </template>
 
@@ -59,6 +71,15 @@ page {
 					color: $color;
 				}
 			}
+		}
+	}
+	
+	.follow-list {
+		flex: 1;
+		border: 1px solid $color;
+		.follow-list-swiper {
+			height: 100%;
+			
 		}
 	}
 }

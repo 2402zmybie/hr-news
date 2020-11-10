@@ -16,7 +16,9 @@
 					</list-scroll>
 				</swiper-item>
 				<swiper-item>
-					<list-scroll></list-scroll>
+					<list-scroll style="height: 100%;">
+						<list-author v-for="item in authorList" :key="item.id" :item="item"></list-author>
+					</list-scroll>
 				</swiper-item>
 			</swiper>
 		</view>
@@ -27,18 +29,24 @@
 	export default {
 		data() {
 			return {
-				activeIndex: 0,
+				activeIndex: 1,
 				list:[],
+				authorList:[],
 				articleShow:false
 			};
 		},
 		onLoad() {
 			//监听收藏或者取消收藏的自定义事件
 			uni.$on('update_article', ()=> {
-				console.log('关注页面收到');
+				console.log('关注页面收到文章');
 				this.getFollow()
 			})
-			this.getFollow()
+			uni.$on('update_author', ()=> {
+				console.log('关注页面收到作者');
+				this.getAuthor()
+			})
+			this.getFollow(),
+			this.getAuthor()
 		},
 		methods:{
 			tab(index) {
@@ -56,6 +64,13 @@
 			change(e) {
 				const current = e.detail.current;
 				this.activeIndex = current
+			},
+			getAuthor() {
+				this.$api.get_author()
+					.then(res => {
+						const {data} = res
+						this.authorList = data
+					})
 			}
 		}
 	}

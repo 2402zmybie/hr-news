@@ -1,0 +1,68 @@
+{
+	"code": 200,
+	"data": [{
+		"_id": "5f962d345fb6630001dd4a1b",
+		"author": {
+			"author_name": "Java架构师讲师团",
+			"avatar": "//img1.sycdn.imooc.com/5dafce1a00013fd501400140-160-160.jpg",
+			"id": "8010388",
+			"status": "normal"
+		},
+		"browse_count": 293,
+		"classify": "后端开发",
+		"collection_count": 1,
+		"comments_count": 0,
+		"cover": ["https://img1.sycdn.imooc.com/5e61e1880001508106401138.png"],
+		"create_time": "2020.03.13 11:39",
+		"id": "301911",
+		"is_like": true,
+		"mode": "base",
+		"thumbs_up_count": 1,
+		"title": "《Java架构师成长直通车》免费直播课开讲啦（3月18号）"
+	}, {
+		"_id": "5f962d345fb6630001dd4a1c",
+		"author": {
+			"author_name": "7七月",
+			"avatar": "//img1.sycdn.imooc.com/54584e2c00010a2c02200220-160-160.jpg",
+			"id": "4294850",
+			"status": "normal"
+		},
+		"browse_count": 6460,
+		"classify": "后端开发",
+		"collection_count": 93,
+		"comments_count": 15,
+		"cover": ["http://img2.sycdn.imooc.com/5dfae4a50001a51905000256.jpg",
+			"//img1.sycdn.imooc.com/5dfaf472000141b612800910.jpg", "//img1.sycdn.imooc.com/5dfb073a0001b38512800896.jpg",
+			"//img1.sycdn.imooc.com/5dfb074d00016a8412800899.jpg", "http://img2.sycdn.imooc.com/5dfae6020001223205000515.jpg",
+			"//img1.sycdn.imooc.com/5dfb08530001ffa125898333.png", "//img1.sycdn.imooc.com/5dfb08730001804327632092.png"
+		],
+		"create_time": "2019.12.19 12:04",
+		"id": "298045",
+		"is_like": true,
+		"mode": "column",
+		"thumbs_up_count": 93,
+		"title": "重塑程序员职业发展观"
+	}, {
+		"_id": "5f962d345fb6630001dd4a1d",
+		"author": {
+			"author_name": "7七月",
+			"avatar": "//img1.sycdn.imooc.com/54584e2c00010a2c02200220-160-160.jpg",
+			"id": "4294850",
+			"status": "normal"
+		},
+		"browse_count": 10938,
+		"classify": "前端开发",
+		"collection_count": 71,
+		"comments_count": 24,
+		"cover": ["https://img1.sycdn.imooc.com/5ccfac620001f8d405000344.jpg",
+			"https://mmbiz.qpic.cn/mmbiz_png/E9CyEN06ol5eEY2XDkdSt1g8LxjZEHNdWPJn2UKgTAzib2G1icHw34KQicUeJJbYt5YGdkE12f41kfsfUcKuE2t8A/640?wx_fmt=png"
+		],
+		"create_time": "2019.05.06 11:45",
+		"id": "286282",
+		"is_like": true,
+		"mode": "image",
+		"thumbs_up_count": 71,
+		"title": "我是个前端开发者，我到底要不要学Node开发？"
+	}],
+	"msg": "更新成功"
+}

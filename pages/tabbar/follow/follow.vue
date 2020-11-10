@@ -7,14 +7,16 @@
 			</view>
 		</view> 
 		<view class="follow-list">
-			<swiper class="follow-list-swiper">
+			<swiper class="follow-list-swiper" :current="activeIndex" @change="change">
 				<swiper-item>
 					<list-scroll style="height: 100%;">
-						<view v-for="item in 100">{{ item }}</view>
+						<uni-load-more v-if="list.length === 0 && !articleShow" status="loading" iconType="snow"></uni-load-more>
+						<list-card v-for="item in list" :key="item._id" :item="item" types="follow"></list-card>
+						<view class="no-data" v-if="articleShow">没有数据</view>
 					</list-scroll>
 				</swiper-item>
 				<swiper-item>
-					<view class="swiper-item">作者</view>
+					<list-scroll></list-scroll>
 				</swiper-item>
 			</swiper>
 		</view>
@@ -25,12 +27,35 @@
 	export default {
 		data() {
 			return {
-				activeIndex: 0
+				activeIndex: 0,
+				list:[],
+				articleShow:false
 			};
+		},
+		onLoad() {
+			//监听收藏或者取消收藏的自定义事件
+			uni.$on('update_article', ()=> {
+				console.log('关注页面收到');
+				this.getFollow()
+			})
+			this.getFollow()
 		},
 		methods:{
 			tab(index) {
 				this.activeIndex = index
+			},
+			getFollow() {
+				this.$api.get_follow()
+					.then(res => {
+						console.log(res);
+						const {data} = res
+						this.list = data
+						this.articleShow = this.list.length === 0  ? true:false
+					})
+			},
+			change(e) {
+				const current = e.detail.current;
+				this.activeIndex = current
 			}
 		}
 	}
@@ -76,11 +101,17 @@ page {
 	
 	.follow-list {
 		flex: 1;
-		border: 1px solid $color;
 		.follow-list-swiper {
 			height: 100%;
 			
 		}
+	}
+	
+	.no-data {
+		padding: 100upx ;
+		font-size: 14px;
+		color: #999;
+		text-align: center;
 	}
 }
 </style>

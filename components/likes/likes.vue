@@ -12,6 +12,12 @@
 				default() {
 					return {}
 				}
+			},
+			types: {
+				type:String,
+				default() {
+					return ''
+				}
 			}
 		},
 		mounted() {
@@ -37,6 +43,8 @@
 						title: this.like? '收藏成功':'取消收藏',
 						icon:'none'
 					});
+					//当点赞或者取消点赞的时候  发送事件
+					uni.$emit('update_article', this.types)
 				}).catch(()=> {
 					uni.hideLoading()
 				})

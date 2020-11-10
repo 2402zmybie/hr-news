@@ -197,7 +197,7 @@
 						title:this.formData.is_like?'关注文章成功':'取消关注文章成功',
 						icon:'none'
 					})
-					uni.$emit('update_article')
+					uni.$emit('update_article','follow')
 				})
 			},
 			//点赞文章

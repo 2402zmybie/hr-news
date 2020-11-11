@@ -1,7 +1,8 @@
 
 import store from '../store/index.js'
+
+
 export default function $http(options) {
-	
 	
 	const {url, data} = options
 	

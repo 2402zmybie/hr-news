@@ -36,11 +36,19 @@
         }
         ,{
             "path" : "pages/home-detail/home-detail",
-            "style" : {}
+            "style" : {
+				"navigationBarTitleText":"文章详情"
+			}
         }
         ,{
             "path" : "pages/detail-comments/detail-comments",
             "style" : {}
+        }
+        ,{
+            "path" : "pages/my-article/my-article",
+            "style" : {
+				"navigationBarTitleText":"我的文章"
+			}
         }
     ],
 	"globalStyle": {

@@ -1,0 +1,24 @@
+{
+	"code": 200,
+	"data": {
+		"_id": "5f962d36cf447a0001579ed0",
+		"article_ids": ["298045", "286282"],
+		"article_likes_ids": ["5f962d345fb6630001dd4a1b", "5f962d345fb6630001dd4a1c", "5f962d345fb6630001dd4a1f"],
+		"author_likes_ids": ["5f962d36cf447a0001579ecf", "8010388", "4294850"],
+		"author_name": "7七月",
+		"avatar": "//img3.sycdn.imooc.com/54584e2c00010a2c02200220-160-160.jpg",
+		"explain": "十年研发及团队管理经验，对程序员面临的各种问题深有体会；精通Python、Java、Node.js、JavaScript等语言，对Web的基础研发、高并发处理与分布式有非常深入的理解。课程讲解深入浅出，极为擅长培养学生的编程思维。",
+		"fans_count": 0,
+		"follow_count": 0,
+		"gender": "男",
+		"id": "4294850",
+		"integral_count": "",
+		"label_ids": ["5f962d35c57f4400017e5a23", "5f962d35c57f4400017e5a25", "5f962d35c57f4400017e5a26",
+			"5f962d35c57f4400017e5a24", "5f962d35c57f4400017e5a27", "5f962d35c57f4400017e5a28"
+		],
+		"professional": "全栈工程师",
+		"status": "normal",
+		"thumbs_up_article_ids": ["5f962d345fb6630001dd4a1a", "5f962d345fb6630001dd4a1b"]
+	},
+	"msg": "数据获取成功"
+}

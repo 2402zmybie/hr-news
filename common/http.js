@@ -1,11 +1,13 @@
+
+import store from '../store/index.js'
 export default function $http(options) {
+	
 	
 	const {url, data} = options
 	
 	//每个接口默认请求user_id
 	const dataObj = {
-		// user_id:'5f962d36cf447a0001579ecf',
-		user_id:'5f962d36cf447a0001579ed0',
+		user_id: store.state.userinfo._id,
 		...data
 	}
 	return new Promise((resolve,reject) => {

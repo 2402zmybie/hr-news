@@ -103,3 +103,11 @@ export const get_my_article = (data) => {
 		data
 	})
 }
+
+
+export const update_feedback = (data) => {
+	return $http({
+		url:'update_feedback',
+		data
+	})
+}

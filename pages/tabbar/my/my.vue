@@ -35,7 +35,7 @@
 				</view>
 				<uni-icons type="arrowright" size="14" color="#666"></uni-icons>
 			</view>
-			<view class="my-content-list">
+			<view class="my-content-list" @click="openFeedBack">
 				<view class="my-content-list-title">
 					<uni-icons class="icons" type="help" size="16" color="#666"></uni-icons>
 					<text>意见反馈</text>
@@ -64,6 +64,11 @@
 			openMyArticle() {
 				uni.navigateTo({
 					url: '/pages/my-article/my-article'
+				});
+			},
+			openFeedBack() {
+				uni.navigateTo({
+					url: '/pages/feedback/feedback'
 				});
 			}
 		}

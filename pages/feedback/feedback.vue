@@ -2,7 +2,7 @@
 	<view>
 		<view class="feedback-title">意见反馈: </view>
 		<view class="feedback-content">
-			<textarea class="feedback-textarea" value="" placeholder="请输入您要反馈的问题" />
+			<textarea class="feedback-textarea" v-model="content" placeholder="请输入您要反馈的问题" />
 		</view>
 		<view class="feedback-title">反馈图片</view>
 		<view class="feedback-image-box">
@@ -28,7 +28,8 @@
 	export default {
 		data() {
 			return {
-				imageLists:[]
+				imageLists:[],
+				content:''
 			};
 		},
 		methods:{
@@ -58,8 +59,11 @@
 					filePath = await this.uploadFiles(filePath)
 					imagesPath.push(filePath)
 				}
-				uni.hideLoading()
-				console.log(imagesPath);
+				
+				this.updateFeedback({
+					content: this.content,
+					feedbackImages: imagesPath
+				})
 			},
 			
 			async uploadFiles(filePath) {
@@ -70,6 +74,31 @@
 				})
 				//fileID 为线上的地址
 				return result.fileID
+			},
+			updateFeedback({content, feedbackImages}) {
+				this.$api.update_feedback({
+					content,
+					feedbackImages
+				})
+				.then(res => {
+					uni.hideLoading()
+					uni.showToast({
+						title: '反馈提交成功',
+						icon:"none"
+					})
+					//提交成功之后 跳转到个人中心
+					setTimeout(()=> {
+						uni.switchTab({
+							url:'/pages/tabbar/my/my'
+						})
+					}, 2000)
+				}).catch(() => {
+					uni.hideLoading()
+					uni.showToast({
+						title: '反馈提交失败',
+						icon:"none"
+					})
+				})
 			}
 		}
 	}
